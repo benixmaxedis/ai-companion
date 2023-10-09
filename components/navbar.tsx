@@ -22,7 +22,7 @@ export const Navbar = ({ isPro }: NavBarProps) => {
   return (
     <div className=" h-16 fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary">
       <div className="flex items-center">
-        <MobileSidebar />
+        <MobileSidebar isPro={isPro} />
         <Link href="/">
           <h1
             className={cn(
