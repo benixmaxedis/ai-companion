@@ -1,0 +1,24 @@
+{
+  "functions": {
+    "api/chat/[chatId]/*.ts": {
+      "memory": 3008,
+      "maxDuration": 60
+    },
+    "api/*.ts": {
+      "memory": 3008,
+      "maxDuration": 60
+    },
+    "api/companion/*.ts": {
+      "memory": 3008,
+      "maxDuration": 60
+    },
+    "api/companion/[companionId]/*.ts": {
+      "memory": 3008,
+      "maxDuration": 60
+    }
+  },
+  "api/webhook*.ts": {
+    "memory": 3008,
+    "maxDuration": 60
+  }
+}
