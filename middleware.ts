@@ -1,13 +1,13 @@
-import { authMiddleware } from '@clerk/nextjs';
+// import { authMiddleware } from '@clerk/nextjs';
 
-// This example protects all routes including api/trpc routes
-// Please edit this to allow other routes to be public as needed.
-// See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
-export default authMiddleware({ publicRoutes: ['/api/webhook'] });
+// // This example protects all routes including api/trpc routes
+// // Please edit this to allow other routes to be public as needed.
+// // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
+// export default authMiddleware({ publicRoutes: ['/api/webhook'] });
 
-export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-};
+// export const config = {
+//   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+// };
 
 // import { authMiddleware } from '@clerk/nextjs';
 
@@ -26,3 +26,14 @@ export const config = {
 //     '/trpc(.*)', // Ignore the /trpc route and its subroutes
 //   ],
 // };
+
+import { authMiddleware } from '@clerk/nextjs';
+
+// Specify no public routes, meaning all routes require authentication
+export default authMiddleware({
+  publicRoutes: [], // An empty array means no public routes
+});
+
+export const config = {
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/(api|trpc)(.*)'],
+};
