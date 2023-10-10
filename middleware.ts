@@ -29,11 +29,18 @@
 
 import { authMiddleware } from '@clerk/nextjs';
 
-// Specify no public routes, meaning all routes require authentication
+// Update the authMiddleware configuration
 export default authMiddleware({
-  publicRoutes: [], // An empty array means no public routes
+  publicRoutes: ['/api/webhook'], // Add the public routes you want to allow access to
+  ignoredRoutes: ['/api', '/trpc'], // Specify routes that should be ignored by Clerk authentication
 });
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/(api|trpc)(.*)'],
+  // Update the matcher to include public and ignored routes
+  matcher: [
+    '/((?!.+\\.[\\w]+$|_next).*)',
+    '/api/webhook', // Add the public routes here as well
+    '/api(.*)', // Ignore the /api route and its subroutes
+    '/trpc(.*)', // Ignore the /trpc route and its subroutes
+  ],
 };
