@@ -1,5 +1,5 @@
 import prismadb from '@/lib/prismadb';
-import { checkSubcription } from '@/lib/subscription';
+import { checkSubscription } from '@/lib/subscription';
 import { currentUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
-    const isPro = await checkSubcription();
+    const isPro = await checkSubscription();
     if (!isPro) {
       return new NextResponse('Pro subscription required', { status: 403 });
     }
