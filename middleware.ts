@@ -9,29 +9,11 @@
 //   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 // };
 
-// import { authMiddleware } from '@clerk/nextjs';
-
-// // Update the authMiddleware configuration
-// export default authMiddleware({
-//   publicRoutes: ['/', '/api/webhook'], // Add the public routes you want to allow access to
-//   ignoredRoutes: ['/api', '/trpc'], // Specify routes that should be ignored by Clerk authentication
-// });
-
-// export const config = {
-//   // Update the matcher to include public and ignored routes
-//   matcher: [
-//     '/((?!.+\\.[\\w]+$|_next).*)',
-//     '/api/webhook', // Add the public routes here as well
-//     '/api(.*)', // Ignore the /api route and its subroutes
-//     '/trpc(.*)', // Ignore the /trpc route and its subroutes
-//   ],
-// };
-
 import { authMiddleware } from '@clerk/nextjs';
 
 // Update the authMiddleware configuration
 export default authMiddleware({
-  publicRoutes: ['/api/webhook'], // Add the public routes you want to allow access to
+  publicRoutes: ['/', '/api/webhook'], // Add the public routes you want to allow access to
   ignoredRoutes: ['/api', '/trpc'], // Specify routes that should be ignored by Clerk authentication
 });
 
@@ -44,3 +26,21 @@ export const config = {
     '/trpc(.*)', // Ignore the /trpc route and its subroutes
   ],
 };
+
+// import { authMiddleware } from '@clerk/nextjs';
+
+// // Update the authMiddleware configuration
+// export default authMiddleware({
+//   publicRoutes: ['/api/webhook'], // Add the public routes you want to allow access to
+//   ignoredRoutes: ['/api', '/trpc'], // Specify routes that should be ignored by Clerk authentication
+// });
+
+// export const config = {
+//   // Update the matcher to include public and ignored routes
+//   matcher: [
+//     '/((?!.+\\.[\\w]+$|_next).*)',
+//     '/api/webhook', // Add the public routes here as well
+//     '/api(.*)', // Ignore the /api route and its subroutes
+//     '/trpc(.*)', // Ignore the /trpc route and its subroutes
+//   ],
+// };
