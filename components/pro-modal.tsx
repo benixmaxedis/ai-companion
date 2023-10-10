@@ -1,25 +1,26 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from '@/components/ui/dialog';
-import { useEffect, useState } from 'react';
 import { useProModal } from '@/hooks/use-pro-modal';
-import axios from 'axios';
-
-import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 
 export const ProModal = () => {
   const proModal = useProModal();
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     setIsMounted(true);
@@ -32,11 +33,18 @@ export const ProModal = () => {
 
       window.location.href = response.data.url;
     } catch (error) {
-      toast({ variant: 'destructive', description: 'Something went wrong' });
+      toast({
+        description: 'Something went wrong',
+        variant: 'destructive',
+      });
     } finally {
       setLoading(false);
     }
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -52,9 +60,9 @@ export const ProModal = () => {
         <Separator />
         <div className="flex justify-between">
           <p className="text-2xl font-medium">
-            $1<span className="text-sm font-normal">.95 per month</span>
+            $9<span className="text-sm font-normal">.99 / mo</span>
           </p>
-          <Button disabled={loading} onClick={onSubscribe} variant="premium">
+          <Button onClick={onSubscribe} disabled={loading} variant="premium">
             Subscribe
           </Button>
         </div>

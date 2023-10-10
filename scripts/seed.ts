@@ -7,7 +7,7 @@ async function main() {
     await db.category.createMany({
       data: [
         { name: 'Famous People' },
-        { name: 'Movies and TV' },
+        { name: 'Movies & TV' },
         { name: 'Musicians' },
         { name: 'Games' },
         { name: 'Animals' },
@@ -16,7 +16,7 @@ async function main() {
       ],
     });
   } catch (error) {
-    console.error('Error seeding default categories', error);
+    console.error('Error seeding default categories:', error);
   } finally {
     await db.$disconnect();
   }
