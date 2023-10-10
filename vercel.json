@@ -15,10 +15,10 @@
     "api/companion/[companionId]/*.ts": {
       "memory": 3008,
       "maxDuration": 60
+    },
+    "api/webhook*.ts": {
+      "memory": 3008,
+      "maxDuration": 60
     }
-  },
-  "api/webhook*.ts": {
-    "memory": 3008,
-    "maxDuration": 60
   }
 }
