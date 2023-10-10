@@ -1,11 +1,14 @@
+import { redirect } from 'next/navigation';
 import { auth, redirectToSignIn } from '@clerk/nextjs';
 
 import prismadb from '@/lib/prismadb';
-import { redirect } from 'next/navigation';
+
 import { ChatClient } from './components/client';
 
 interface ChatIdPageProps {
-  params: { chatId: string };
+  params: {
+    chatId: string;
+  };
 }
 
 const ChatIdPage = async ({ params }: ChatIdPageProps) => {
@@ -24,7 +27,9 @@ const ChatIdPage = async ({ params }: ChatIdPageProps) => {
         orderBy: {
           createdAt: 'asc',
         },
-        where: { userId },
+        where: {
+          userId,
+        },
       },
       _count: {
         select: {
@@ -38,7 +43,7 @@ const ChatIdPage = async ({ params }: ChatIdPageProps) => {
     return redirect('/');
   }
 
-  return <ChatClient companion={companion}></ChatClient>;
+  return <ChatClient companion={companion} />;
 };
 
 export default ChatIdPage;

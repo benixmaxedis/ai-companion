@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import { useDebouce } from '@/hooks/use-debounce';
+import { useDebounce } from '@/hooks/use-debounce';
 
 export const SearchInput = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ export const SearchInput = () => {
 
   const [value, setValue] = useState(name || '');
 
-  const debouncedValue = useDebouce<string>(value, 500);
+  const debouncedValue = useDebounce<string>(value, 500);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value);

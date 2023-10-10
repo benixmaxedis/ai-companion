@@ -1,8 +1,7 @@
-import Categories from '@/components/categories';
-import { Companions } from '@/components/companions';
-
-import { SearchInput } from '@/components/search-input';
 import prismadb from '@/lib/prismadb';
+import { Categories } from '@/components/categories';
+import { Companions } from '@/components/companions';
+import { SearchInput } from '@/components/search-input';
 
 interface RootPageProps {
   searchParams: {
@@ -15,7 +14,9 @@ const RootPage = async ({ searchParams }: RootPageProps) => {
   const data = await prismadb.companion.findMany({
     where: {
       categoryId: searchParams.categoryId,
-      name: { search: searchParams.name },
+      name: {
+        search: searchParams.name,
+      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -28,6 +29,7 @@ const RootPage = async ({ searchParams }: RootPageProps) => {
       },
     },
   });
+
   const categories = await prismadb.category.findMany();
 
   return (

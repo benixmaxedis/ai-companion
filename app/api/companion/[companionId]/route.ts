@@ -1,7 +1,8 @@
-import prismadb from '@/lib/prismadb';
-import { checkSubscription } from '@/lib/subscription';
 import { auth, currentUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
+
+import prismadb from '@/lib/prismadb';
+import { checkSubscription } from '@/lib/subscription';
 
 export async function PATCH(
   req: Request,
@@ -13,11 +14,12 @@ export async function PATCH(
     const { src, name, description, instructions, seed, categoryId } = body;
 
     if (!params.companionId) {
-      return new NextResponse('Companion ID is required', { status: 400 });
+      return new NextResponse('Companion ID required', { status: 400 });
     }
 
-    if (!user || !user.id || !user.firstName)
-      return new NextResponse('Unauthorised', { status: 401 });
+    if (!user || !user.id || !user.firstName) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
 
     if (
       !src ||
@@ -31,12 +33,16 @@ export async function PATCH(
     }
 
     const isPro = await checkSubscription();
+
     if (!isPro) {
       return new NextResponse('Pro subscription required', { status: 403 });
     }
 
     const companion = await prismadb.companion.update({
-      where: { id: params.companionId, userId: user.id },
+      where: {
+        id: params.companionId,
+        userId: user.id,
+      },
       data: {
         categoryId,
         userId: user.id,
@@ -51,7 +57,7 @@ export async function PATCH(
 
     return NextResponse.json(companion);
   } catch (error) {
-    console.log('[COMPANION_PATCH]');
+    console.log('[COMPANION_PATCH]', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
@@ -62,11 +68,16 @@ export async function DELETE(
 ) {
   try {
     const { userId } = auth();
+
     if (!userId) {
-      return new NextResponse('Unauthorised', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
+
     const companion = await prismadb.companion.delete({
-      where: { userId, id: params.companionId },
+      where: {
+        userId,
+        id: params.companionId,
+      },
     });
 
     return NextResponse.json(companion);
