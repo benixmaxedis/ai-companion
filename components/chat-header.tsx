@@ -1,9 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { useUser } from '@clerk/nextjs';
-import { Companion, Message } from '@prisma/client';
 import {
   ChevronLeft,
   Edit,
@@ -11,15 +8,18 @@ import {
   MoreVertical,
   Trash,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Companion, Message } from '@prisma/client';
+import { useUser } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
+import { BotAvatar } from '@/components/bot-avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { BotAvatar } from '@/components/bot-avatar';
 import { useToast } from '@/components/ui/use-toast';
 
 interface ChatHeaderProps {
@@ -39,13 +39,15 @@ export const ChatHeader = ({ companion }: ChatHeaderProps) => {
   const onDelete = async () => {
     try {
       await axios.delete(`/api/companion/${companion.id}`);
-      toast({ description: 'Success' });
+      toast({
+        description: 'Success.',
+      });
       router.refresh();
       router.push('/');
     } catch (error) {
       toast({
-        description: 'Something went wrong when deleting',
         variant: 'destructive',
+        description: 'Something went wrong.',
       });
     }
   };

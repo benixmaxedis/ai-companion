@@ -1,10 +1,11 @@
 'use client';
 
 import { ChatRequestOptions } from 'ai';
+import { SendHorizonal } from 'lucide-react';
 import { ChangeEvent, FormEvent } from 'react';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { SendHorizonal } from 'lucide-react';
 
 interface ChatFormProps {
   input: string;
@@ -19,10 +20,10 @@ interface ChatFormProps {
 }
 
 export const ChatForm = ({
-  isLoading,
   input,
   handleInputChange,
   onSubmit,
+  isLoading,
 }: ChatFormProps) => {
   return (
     <form
@@ -37,7 +38,7 @@ export const ChatForm = ({
         className="rounded-lg bg-primary/10"
       />
       <Button disabled={isLoading} variant="ghost">
-        <SendHorizonal className="h-6 w-6" />
+        <SendHorizonal className="w-6 h-6" />
       </Button>
     </form>
   );
