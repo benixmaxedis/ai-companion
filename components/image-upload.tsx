@@ -33,7 +33,7 @@ export const ImageUpload = ({
       <CldUploadButton
         options={{ maxFiles: 1 }}
         onUpload={(result: any) => onChange(result.info.secure_url)}
-        uploadPreset="t4drjppf"
+        uploadPreset="dvzakei6"
       >
         <div
           className="
