@@ -30,7 +30,7 @@ export const Navbar = ({ isPro }: NavbarProps) => {
               font.className
             )}
           >
-            companion.ai
+            ai-companion
           </h1>
         </Link>
       </div>
